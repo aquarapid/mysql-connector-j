@@ -706,9 +706,9 @@ public class StatementImpl implements Statement {
      * This is reset by RowDataDynamic.close().
      */
     protected void setupStreamingTimeout(MySQLConnection con) throws SQLException {
-        if (createStreamingResultSet() && con.getNetTimeoutForStreamingResults() > 0) {
-            executeSimpleNonQuery(con, "SET net_write_timeout=" + con.getNetTimeoutForStreamingResults());
-        }
+        //if (createStreamingResultSet() && con.getNetTimeoutForStreamingResults() > 0) {
+        //    executeSimpleNonQuery(con, "SET net_write_timeout=" + con.getNetTimeoutForStreamingResults());
+        //}
     }
 
     /**

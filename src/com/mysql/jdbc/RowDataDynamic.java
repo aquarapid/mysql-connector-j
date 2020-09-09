@@ -160,7 +160,7 @@ public class RowDataDynamic implements RowData {
                 }
             }
 
-            if (conn != null) {
+            if (false && conn != null) {
                 if (!conn.getClobberStreamingResults() && conn.getNetTimeoutForStreamingResults() > 0) {
                     String oldValue = conn.getServerVariable("net_write_timeout");
 

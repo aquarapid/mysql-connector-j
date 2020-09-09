@@ -1534,7 +1534,7 @@ public class ConnectionImpl extends ConnectionPropertiesImpl implements MySQLCon
 
                 // no-op if _relaxAutoCommit == true
                 if (this.autoCommit && !getRelaxAutoCommit()) {
-                    throw SQLError.createSQLException("Can't call commit when autocommit=true", getExceptionInterceptor());
+                    //throw SQLError.createSQLException("Can't call commit when autocommit=true", getExceptionInterceptor());
                 } else if (this.transactionsSupported) {
                     if (getUseLocalTransactionState() && versionMeetsMinimum(5, 0, 0)) {
                         if (!this.io.inTransactionOnServer()) {
@@ -1542,7 +1542,7 @@ public class ConnectionImpl extends ConnectionPropertiesImpl implements MySQLCon
                         }
                     }
 
-                    execSQL(null, "commit", -1, null, DEFAULT_RESULT_SET_TYPE, DEFAULT_RESULT_SET_CONCURRENCY, false, this.database, null, false);
+                    //execSQL(null, "commit", -1, null, DEFAULT_RESULT_SET_TYPE, DEFAULT_RESULT_SET_CONCURRENCY, false, this.database, null, false);
                 }
             } catch (SQLException sqlException) {
                 if (SQLError.SQL_STATE_COMMUNICATION_LINK_FAILURE.equals(sqlException.getSQLState())) {
@@ -3165,7 +3165,7 @@ public class ConnectionImpl extends ConnectionPropertiesImpl implements MySQLCon
                     getExceptionInterceptor());
         }
 
-        setSessionVariables();
+        //setSessionVariables();
 
         //
         // the "boolean" type didn't come along until MySQL-4.1
@@ -3361,6 +3361,7 @@ public class ConnectionImpl extends ConnectionPropertiesImpl implements MySQLCon
         //
 
         setupServerForTruncationChecks();
+        setSessionVariables();
     }
 
     public boolean isQueryCacheEnabled() {
@@ -4731,6 +4732,10 @@ public class ConnectionImpl extends ConnectionPropertiesImpl implements MySQLCon
      *                if a database access error occurs
      */
     public void setAutoCommit(final boolean autoCommitFlag) throws SQLException {
+        this.autoCommit = autoCommitFlag;
+        if (true) {
+		return;
+	}
         synchronized (getConnectionMutex()) {
             checkClosed();
 
@@ -5061,7 +5066,7 @@ public class ConnectionImpl extends ConnectionPropertiesImpl implements MySQLCon
                                     getExceptionInterceptor());
                     }
 
-                    execSQL(null, sql, -1, null, DEFAULT_RESULT_SET_TYPE, DEFAULT_RESULT_SET_CONCURRENCY, false, this.database, null, false);
+                    //execSQL(null, sql, -1, null, DEFAULT_RESULT_SET_TYPE, DEFAULT_RESULT_SET_CONCURRENCY, false, this.database, null, false);
 
                     this.isolationLevel = level;
                 }
